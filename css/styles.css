@@ -49,6 +49,7 @@
   box-sizing: border-box;
 }
 
+/* Flexbox column on the body pushes the footer to the bottom of short pages */
 body {
   margin: 0;
   min-height: 100vh;
@@ -131,6 +132,7 @@ li + li {
 }
 
 /* ---------- 3. Header and navigation ---------- */
+/* Flexbox header: on phones the logo, title and nav stack and center */
 header {
   display: flex;
   flex-wrap: wrap;
@@ -156,6 +158,7 @@ nav {
   flex: 1 1 100%;
 }
 
+/* Nav links sit in a wrapping flex row so they never overflow a small screen */
 nav ul {
   display: flex;
   flex-wrap: wrap;
@@ -174,6 +177,7 @@ nav li + li {
   margin-top: 0;
 }
 
+/* 44px minimum height gives each link a finger-sized tap target */
 nav a {
   display: flex;
   align-items: center;
@@ -200,6 +204,7 @@ nav a[aria-current="page"] {
 }
 
 /* ---------- 4. Main content and cards ---------- */
+/* Mobile first: main is a single flex column; the 48em query turns it into rows */
 main {
   display: flex;
   flex-direction: column;
@@ -211,6 +216,7 @@ main {
   padding: var(--space-4) var(--gutter);
 }
 
+/* Each section is a card with a honey border */
 main > section {
   background: var(--cream);
   border: 2px solid var(--honey);
@@ -322,6 +328,7 @@ label {
   font-weight: 600;
 }
 
+/* Full-width fields; crust border used instead of honey for 3:1 contrast */
 input,
 select,
 textarea {
@@ -358,6 +365,7 @@ button:hover {
 }
 
 /* ---------- 6. Footer ---------- */
+/* margin-top: auto works with the body flex column to keep the footer at the bottom */
 footer {
   margin-top: auto;
   padding: var(--space-4) var(--edge);
@@ -423,11 +431,13 @@ footer a:focus-visible {
     justify-content: flex-start;
   }
 
+  /* Switch main from a column to a wrapping row */
   main {
     flex-direction: row;
     flex-wrap: wrap;
   }
 
+  /* Each card takes half the row (minus the gap), so cards pair up two per line */
   main > section {
     flex: 1 1 calc(50% - var(--main-gap));
     min-width: 0;

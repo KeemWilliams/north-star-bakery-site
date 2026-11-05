@@ -1,0 +1,447 @@
+/* ==========================================================================
+   North Star Bakery - design system + responsive layout
+   Mobile-first: base styles are the phone layout; media queries add columns.
+   ========================================================================== */
+
+/* ---------- 1. Design tokens ---------- */
+:root {
+  /* Colors (the only four used anywhere in this file) */
+  --cream: #FBF6EE;    /* page background; text on dark areas */
+  --espresso: #3B2A1E; /* body text; header and footer background */
+  --crust: #A3471E;    /* accent: links, h2 rule, buttons */
+  --honey: #E8C27A;    /* highlights on dark areas; card and field borders */
+
+  /* Fonts (exactly two families) */
+  --font-heading: "Lora", Georgia, serif;
+  --font-body: "Source Sans 3", system-ui, Arial, sans-serif;
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+
+  /* Type scale (redefined inside the media queries below) */
+  --text-body: 1.0625rem;
+  --text-h1: 1.75rem;
+  --text-h2: 1.375rem;
+  --text-h3: 1.125rem;
+
+  /* Layout (redefined inside the media queries below) */
+  --page-max: 1100px;
+  --gutter: var(--space-3);
+  --main-gap: var(--space-3);
+  --card-pad: var(--space-3);
+  --radius: 0.5rem;
+  /* Header/footer side padding that lines up with the centered main column */
+  --edge: max(var(--gutter), calc((100% - var(--page-max)) / 2 + var(--gutter)));
+}
+
+/* ---------- 2. Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--cream);
+  color: var(--espresso);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.6;
+}
+
+img,
+video,
+picture {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+audio {
+  display: block;
+  width: 100%;
+}
+
+/* Overrides the width="600" attribute on the video so it never forces scroll */
+video {
+  width: 100%;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 var(--space-3);
+}
+
+h1 { font-size: var(--text-h1); }
+h2 { font-size: var(--text-h2); }
+h3 { font-size: var(--text-h3); font-weight: 600; margin-top: var(--space-4); }
+
+p,
+li {
+  max-width: 68ch;
+}
+
+p {
+  margin: 0 0 var(--space-3);
+}
+
+ul {
+  margin: 0 0 var(--space-3);
+  padding-left: 1.25rem;
+}
+
+li + li {
+  margin-top: var(--space-1);
+}
+
+/* Skip link: hidden until it receives keyboard focus */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: var(--space-3);
+  z-index: 10;
+  padding: var(--space-2) var(--space-3);
+  background: var(--crust);
+  color: var(--cream);
+  font-weight: 600;
+  border-radius: 0 0 var(--radius) var(--radius);
+  transform: translateY(-120%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 3px solid var(--honey);
+  outline-offset: 2px;
+}
+
+/* ---------- 3. Header and navigation ---------- */
+header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  padding: var(--space-3) var(--edge);
+  background: var(--espresso);
+  color: var(--cream);
+  text-align: center;
+}
+
+header img {
+  width: 96px;
+}
+
+header h1 {
+  flex: 1 1 100%;
+  margin: 0;
+}
+
+nav {
+  flex: 1 1 100%;
+}
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-1) var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  max-width: none;
+}
+
+nav li + li {
+  margin-top: 0;
+}
+
+nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  border-bottom: 3px solid transparent;
+  border-radius: var(--radius);
+  color: var(--cream);
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+}
+
+nav a:hover {
+  border-bottom-color: var(--honey);
+}
+
+/* Current page: solid honey tab with dark text (not color alone: also bold + filled) */
+nav a[aria-current="page"] {
+  background: var(--honey);
+  border-bottom-color: var(--honey);
+  color: var(--espresso);
+}
+
+/* ---------- 4. Main content and cards ---------- */
+main {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  gap: var(--main-gap);
+  width: 100%;
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: var(--space-4) var(--gutter);
+}
+
+main > section {
+  background: var(--cream);
+  border: 2px solid var(--honey);
+  border-radius: var(--radius);
+  padding: var(--card-pad);
+}
+
+main h2 {
+  margin-top: 0;
+  padding-bottom: var(--space-2);
+  border-bottom: 3px solid var(--crust);
+}
+
+main img,
+main video {
+  border-radius: var(--radius);
+  margin: 0 0 var(--space-3);
+}
+
+figure {
+  margin: 0 0 var(--space-3);
+}
+
+figure img {
+  margin-bottom: var(--space-2);
+}
+
+figcaption {
+  font-style: italic;
+}
+
+/* Links inside the page content */
+main a {
+  color: var(--crust);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+main a:hover {
+  color: var(--espresso);
+  text-decoration-thickness: 3px;
+}
+
+main a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--crust);
+  outline-offset: 2px;
+}
+
+/* Price lines on the products page */
+.price {
+  font-weight: 700;
+  color: var(--crust);
+}
+
+/* Call-to-action link paragraphs: link rendered as a button-like pill */
+.cta {
+  margin-top: var(--space-4);
+}
+
+.cta a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  background: var(--crust);
+  border-radius: 999px;
+  color: var(--cream);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cta a:hover {
+  background: var(--espresso);
+  color: var(--cream);
+}
+
+/* ---------- 5. Contact form ---------- */
+form {
+  margin: 0;
+}
+
+fieldset {
+  min-width: 0; /* stops long fields forcing horizontal scroll on phones */
+  margin: 0 0 var(--space-3);
+  padding: var(--space-3);
+  border: 2px solid var(--honey);
+  border-radius: var(--radius);
+}
+
+legend {
+  padding: 0 var(--space-2);
+  font-family: var(--font-heading);
+  font-size: var(--text-h3);
+  font-weight: 700;
+  color: var(--crust);
+}
+
+fieldset p {
+  max-width: none;
+}
+
+label {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-weight: 600;
+}
+
+input,
+select,
+textarea {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+  background: var(--cream);
+  color: var(--espresso);
+  border: 2px solid var(--crust);
+  border-radius: var(--radius);
+  font: inherit;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  background: var(--crust);
+  color: var(--cream);
+  border: 2px solid var(--crust);
+  border-radius: var(--radius);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--espresso);
+  border-color: var(--espresso);
+}
+
+/* ---------- 6. Footer ---------- */
+footer {
+  margin-top: auto;
+  padding: var(--space-4) var(--edge);
+  background: var(--espresso);
+  color: var(--cream);
+  text-align: center;
+}
+
+footer p {
+  max-width: none;
+  margin: 0 0 var(--space-2);
+}
+
+footer p:last-child {
+  margin-bottom: 0;
+}
+
+footer a {
+  color: var(--honey);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+footer a:hover {
+  color: var(--cream);
+}
+
+header a:focus-visible,
+footer a:focus-visible {
+  outline: 3px solid var(--honey);
+  outline-offset: 2px;
+}
+
+/* ---------- 7. Responsive breakpoints ---------- */
+
+/* 48em (768px) and up: header becomes a row (logo beside title, nav full width
+   below), main switches to a wrapping row so sections pair into 2 columns,
+   and type and spacing step up a little. */
+@media (min-width: 48em) {
+  :root {
+    --text-h1: 2.25rem;
+    --text-h2: 1.5rem;
+    --text-h3: 1.25rem;
+    --main-gap: var(--space-4);
+    --card-pad: var(--space-4);
+  }
+
+  header {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  header img {
+    width: 120px;
+  }
+
+  header h1 {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  nav ul {
+    justify-content: flex-start;
+  }
+
+  main {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  main > section {
+    flex: 1 1 calc(50% - var(--main-gap));
+    min-width: 0;
+  }
+}
+
+/* 64em (1024px) and up: larger body text, headings and gutters for wide screens. */
+@media (min-width: 64em) {
+  :root {
+    --text-body: 1.125rem;
+    --text-h1: 2.5rem;
+    --text-h2: 1.75rem;
+    --text-h3: 1.375rem;
+    --gutter: var(--space-4);
+    --card-pad: var(--space-4);
+  }
+
+  header img {
+    width: 140px;
+  }
+}

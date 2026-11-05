@@ -1,0 +1,21 @@
+{
+  "name": "North Star Bakery Site",
+  "image": "mcr.microsoft.com/devcontainers/python:3",
+
+  // Static HTML site: serve the repo root on port 8000 every time the codespace opens.
+  "postAttachCommand": "python3 -m http.server 8000",
+
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": {
+      "label": "Bakery site",
+      "onAutoForward": "openPreview"
+    }
+  },
+
+  "customizations": {
+    "codespaces": {
+      "openFiles": ["index.html"]
+    }
+  }
+}

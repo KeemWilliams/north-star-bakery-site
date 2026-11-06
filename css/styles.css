@@ -459,3 +459,227 @@ footer a:focus-visible {
     width: 140px;
   }
 }
+
+/* ---------- 8. Shared pieces for the JavaScript features ---------- */
+
+/* Text for screen readers only (used for the product name inside buttons) */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Outline button: cream with a crust border. When it is "pressed" (a chosen
+   filter or an item on the list) it fills with crust AND gets a check mark,
+   so the state is not shown by color alone. */
+.btn-outline {
+  background: var(--cream);
+  color: var(--crust);
+}
+
+.btn-outline:hover {
+  background: var(--espresso);
+  border-color: var(--espresso);
+  color: var(--cream);
+}
+
+.btn-outline[aria-pressed="true"] {
+  background: var(--crust);
+  color: var(--cream);
+}
+
+.btn-outline[aria-pressed="true"]::before {
+  content: "\2713\00a0";
+}
+
+/* Item count on the Contact nav link, e.g. "Contact and Pre-Orders (2)".
+   white-space: pre keeps the leading space inside the flex nav link. */
+.nav-count {
+  white-space: pre;
+}
+
+/* ---------- 9. My Pre-Order List (products page) ---------- */
+
+/* Full width across the two-column layout (beats the 50% card rule above) */
+main > section.preorder-planner {
+  flex: 1 1 100%;
+}
+
+.planner-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.planner-layout[hidden] {
+  display: none;
+}
+
+.planner-browse {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.status-text {
+  margin: var(--space-2) 0 var(--space-3);
+  font-weight: 600;
+}
+
+/* Product cards wrap into as many columns as fit */
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 14rem;
+  max-width: none;
+  margin: 0;
+  padding: var(--space-3);
+  border: 2px solid var(--honey);
+  border-radius: var(--radius);
+}
+
+.product-list li + li {
+  margin-top: 0;
+}
+
+.product-card h3 {
+  margin: 0 0 var(--space-2);
+}
+
+.product-card p {
+  margin: 0 0 var(--space-2);
+}
+
+/* Pushes the add/remove button to the bottom so the buttons line up */
+.product-card button {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.list-panel {
+  padding: var(--space-3);
+  border: 2px solid var(--crust);
+  border-radius: var(--radius);
+}
+
+.list-panel h3 {
+  margin-top: 0;
+}
+
+.list-items {
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  list-style: none;
+}
+
+.list-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  max-width: none;
+  padding: var(--space-1) 0;
+  border-bottom: 1px solid var(--honey);
+}
+
+.list-row + .list-row {
+  margin-top: 0;
+}
+
+.list-actions {
+  margin-bottom: var(--space-2);
+}
+
+.list-panel .cta {
+  margin: 0;
+}
+
+/* ---------- 10. Contact form feedback ---------- */
+
+/* Message right below its field. Empty ones take no space. */
+.field-error {
+  display: block;
+  margin-top: var(--space-1);
+  color: var(--crust);
+  font-weight: 600;
+}
+
+.field-error:empty {
+  margin: 0;
+}
+
+/* A dashed border and halo mark a field with a problem (the Error: text is
+   the main signal, so color is not the only cue) */
+input[aria-invalid="true"],
+select[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-style: dashed;
+  box-shadow: 0 0 0 2px var(--crust);
+}
+
+.form-note {
+  display: block;
+  margin-top: var(--space-1);
+  font-style: italic;
+}
+
+.saved-note {
+  margin: var(--space-3) 0 0;
+}
+
+.saved-note .btn-outline {
+  display: block;
+  margin-top: var(--space-2);
+}
+
+/* Shown after a valid submit, above the form */
+.form-confirmation {
+  margin: 0 0 var(--space-3);
+  padding: var(--space-3);
+  border: 3px solid var(--crust);
+  border-radius: var(--radius);
+}
+
+.form-confirmation[hidden] {
+  display: none;
+}
+
+.form-confirmation p {
+  margin-bottom: var(--space-2);
+}
+
+.confirmation-title {
+  font-weight: 700;
+}
+
+/* Wide screens: the list panel sits beside the product cards */
+@media (min-width: 64em) {
+  .planner-layout {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .list-panel {
+    flex: 0 0 18rem;
+  }
+}

@@ -45,6 +45,10 @@ python -m http.server 8000
 |-- contact.html
 |-- css/
 |   `-- styles.css
+|-- js/
+|   |-- shared.js   browser storage helpers and the nav count
+|   |-- products.js pre-order list and category filter
+|   `-- contact.js  form validation, pre-fill and saved details
 |-- images/        logo and photos (jpg, png)
 |-- media/         welcome audio (mp3) and video (mp4)
 |-- .devcontainer/ Codespaces setup

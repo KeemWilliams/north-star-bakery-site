@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/shared.js" defer></script>
+    <script src="js/products.js" defer></script>
 </head>
 <body>
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -27,6 +29,27 @@
     </header>
 
     <main id="main">
+        <section class="preorder-planner" aria-labelledby="plannerHeading">
+            <h2 id="plannerHeading">My Pre-Order List</h2>
+            <p>Pick the items you would like to pre-order. Your list is saved in this browser and carries over to the pre-order form.</p>
+            <noscript><p>The pre-order list needs JavaScript. You can still <a href="contact.html">use the pre-order form</a> and type what you would like.</p></noscript>
+            <div class="planner-layout" id="plannerLayout" hidden>
+                <div class="planner-browse">
+                    <div class="filter-buttons" id="categoryFilters" role="group" aria-label="Filter items by category"></div>
+                    <p class="status-text" id="filterStatus" role="status"></p>
+                    <ul class="product-list" id="productList"></ul>
+                </div>
+                <div class="list-panel">
+                    <h3 id="myListHeading" tabindex="-1">My list</h3>
+                    <p class="status-text" id="listCount" role="status"></p>
+                    <p id="listEmpty">Nothing on your list yet. Add a loaf, a pastry, or a cake and it will show up here.</p>
+                    <ul class="list-items" id="myListItems"></ul>
+                    <p class="list-actions"><button type="button" class="btn-outline" id="clearList">Clear list</button></p>
+                    <p class="cta"><a href="contact.html">Go to the pre-order form</a></p>
+                </div>
+            </div>
+        </section>
+
         <section>
             <h2>Breads</h2>
             <img src="images/bakery-bread_c.jpg" width="600" height="600" alt="Rustic loaves of seeded and floured sourdough bread stacked behind the bakery glass">

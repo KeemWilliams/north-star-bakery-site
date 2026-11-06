@@ -264,6 +264,7 @@ function renderMyList() {
   getElement("listCount").textContent = count === 0
     ? "Your list has 0 items."
     : "Your list has " + pluralItems(count) + ".";
+  getElement("viewListLink").textContent = count === 0 ? "View my list" : "View my list (" + count + ")";
   getElement("listEmpty").hidden = count > 0;
   getElement("clearList").hidden = count === 0;
 }
@@ -281,6 +282,13 @@ function createListRow(item) {
   row.appendChild(removeButton);
 
   return row;
+}
+
+/* On narrow screens the panel sits below the cards. This link jumps to it
+   and moves keyboard focus there (the CSS hides the link on wide screens). */
+function jumpToMyList(event) {
+  event.preventDefault();
+  getElement("myListHeading").focus();
 }
 
 /* ---------- Start up ---------- */
@@ -312,6 +320,7 @@ function initPlanner() {
   renderProducts();
   renderMyList();
   getElement("clearList").addEventListener("click", clearList);
+  getElement("viewListLink").addEventListener("click", jumpToMyList);
 
   /* Tidy the saved list in storage too (drops unknown items) */
   savePreorderList(preorderList);
